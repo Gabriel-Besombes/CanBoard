@@ -1,0 +1,44 @@
+[project]
+    name = "canboard-backend"
+    version = "0.1.0"
+    description = "Backend for CanBoard"
+    authors = [
+        {name = "Gabriel Besombes",email = "gabybesombes84@gmail.com"}
+    ]
+    readme = "README.md"
+
+    requires-python = ">=3.14"
+
+    dependencies = [
+        "fastapi (>=0.128.0,<0.129.0)",
+        "uvicorn (>=0.40.0,<0.41.0)",
+        "pydantic (>=2.12.5,<3.0.0)",
+        "sqlalchemy (>=2.0.46,<3.0.0)",
+        "alembic (>=1.18.1,<2.0.0)"
+    ]
+
+
+[dependency-groups]
+    dev = [
+        "pytest (>=9.0.2,<10.0.0)",
+        "pytest-asyncio (>=1.3.0,<2.0.0)",
+        "httpx (>=0.28.1,<0.29.0)",
+        "coverage (>=7.13.1,<8.0.0)"
+    ]
+
+
+[tool.pytest.ini_options]
+    rootdir = "."
+    testpaths = ["test"]
+    python_files = "test_*.py"
+    python_classes = "Test*"
+    python_functions = "test_*"
+
+
+[tool.poetry]
+    packages = [{include = "app", from = "."}]
+
+
+[build-system]
+    requires = ["poetry-core>=2.0.0,<3.0.0"]
+    build-canboard-backend = "poetry.core.masonry.api"

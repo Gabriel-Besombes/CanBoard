@@ -9,21 +9,26 @@ Tested classes:
 
 import pytest
 
+class TestElement(CardElement):
+    """Empty subclass of CardElement for testing purposes. All testing will be done on this dummy class since CardElement is abstract."""
+    
+    def __init__(self, id, name, content=None):
+        super().__init__(id, name, content)
+
 TEST_CARD_ELEMENT_ID = 1
 TEST_CARD_ELEMENT_NAME = "Test Card Element"
-TEST_CARD_ELEMENT_DESCRIPTION = "This is a test card element."
-
+TEST_CARD_ELEMENT_CONTENT = "Test Content"
 
 @pytest.mark.tested_classes("CardElement")
 class TestCardElement:
     
     @pytest.fixture()
-    def card_element(self) -> CardElement:
+    def test_element(self) -> TestElement:
         """Create a fresh CardElement for each test."""
-        return CardElement(id=TEST_CARD_ELEMENT_ID, name=TEST_CARD_ELEMENT_NAME, description=TEST_CARD_ELEMENT_DESCRIPTION)
+        return TestElement(id=TEST_CARD_ELEMENT_ID, name=TEST_CARD_ELEMENT_NAME, content=TEST_CARD_ELEMENT_CONTENT)
 
-    def test_initialization(self, card_element: CardElement):
+    def test_initialization(self, test_element: TestElement):
         """Test that CardElement initializes with correct attributes."""
-        assert card_element.id == TEST_CARD_ELEMENT_ID
-        assert card_element.name == TEST_CARD_ELEMENT_NAME
-        assert card_element.description == TEST_CARD_ELEMENT_DESCRIPTION
+        assert test_element.id == TEST_CARD_ELEMENT_ID
+        assert test_element.name == TEST_CARD_ELEMENT_NAME
+        assert test_element.content == TEST_CARD_ELEMENT_CONTENT

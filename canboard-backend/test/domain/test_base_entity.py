@@ -10,7 +10,7 @@ Tested classes:
 import pytest
 
 class TestEntity(BaseEntity):
-    """Empty subclass of BaseEntity for testing purposes."""
+    """Empty subclass of BaseEntity for testing purposes. All testing will be done on this dummy class since BaseEntity is abstract."""
     
     def __init__(self, id):
         super().__init__(id)

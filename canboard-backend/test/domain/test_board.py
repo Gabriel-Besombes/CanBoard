@@ -8,10 +8,12 @@ Tested classes:
 """
 
 import pytest
+from app.domain.values.name import Name
+from app.domain.values.description import Description
 
 TEST_BOARD_ID = 1
-TEST_BOARD_NAME = "Test Board"
-TEST_BOARD_DESCRIPTION = "This is a test board."
+TEST_BOARD_NAME = Name("Test Board")
+TEST_BOARD_DESCRIPTION = Description("This is a test board.")
 
 class TestBoard:
     

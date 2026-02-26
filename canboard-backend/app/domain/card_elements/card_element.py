@@ -1,10 +1,11 @@
 from app.domain.base_entity import BaseEntity
+from app.domain.values.name import Name
 from abc import ABC
 
 class CardElement(BaseEntity, ABC):
     """Domain entity representing a card element."""
     
-    def __init__(self, id: int, name: str, content):
+    def __init__(self, id: int, name: Name, content):
         """
         Initialize a CardElement.
         
@@ -18,8 +19,14 @@ class CardElement(BaseEntity, ABC):
         self._content = content
         
     @property
-    def name(self) -> str:
+    def name(self) -> Name:
         return self._name
+    
+    @name.setter
+    def name(self, new_name: Name):
+        if not isinstance(new_name, Name):
+            raise ValueError("Name must be a Name instance")
+        self._name = new_name
 
     @property
     def content(self):

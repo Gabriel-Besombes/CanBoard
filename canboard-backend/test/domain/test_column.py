@@ -9,13 +9,15 @@ Tested classes:
 
 import pytest
 from app.domain.card import Card
+from app.domain.values.name import Name
+from app.domain.values.description import Description
 
 TEST_COLUMN_ID = 1
-TEST_COLUMN_NAME = "Test Column"
-TEST_COLUMN_DESCRIPTION = "This is a test column."
+TEST_COLUMN_NAME = Name("Test Column")
+TEST_COLUMN_DESCRIPTION = Description("This is a test column.")
 TEST_COLUMN_CARDS = [
-    Card(id=1, name="Card 1", description="First test card."),
-    Card(id=2, name="Card 2", description="Second test card.")
+    Card(id=1, name=Name("Card 1"), description=Description("First test card.")),
+    Card(id=2, name=Name("Card 2"), description=Description("Second test card."))
 ]
 
 class TestColumn:

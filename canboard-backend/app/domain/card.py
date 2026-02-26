@@ -1,24 +1,38 @@
 from app.domain.base_entity import BaseEntity
 from app.domain.card_elements.card_element import CardElement
+from app.domain.values.name import Name
+from app.domain.values.description import Description
 from typing import List
 
 class Card(BaseEntity):
     """Domain entity representing a card with elements."""
 
-    def __init__(self, id: int, name: str, description: str, elements: List[CardElement] = None):
+    def __init__(self, id: int, name: Name, description: Description, elements: List[CardElement] = None):
         super().__init__(id)
         self._name = name
         self._description = description
         self._elements = elements if elements is not None else []
 
     @property
-    def name(self) -> str:
+    def name(self) -> Name:
         return self._name
+    
+    @name.setter
+    def name(self, new_name: Name):
+        if not isinstance(new_name, Name):
+            raise ValueError("Name must be a Name instance")
+        self._name = new_name
 
     @property
-    def description(self) -> str:
+    def description(self) -> Description:
         return self._description
 
+    @description.setter
+    def description(self, new_description: Description):
+        if not isinstance(new_description, Description):
+            raise ValueError("Description must be a Description instance")
+        self._description = new_description
+        
     @property
     def elements(self) -> List[CardElement]:
         return self._elements

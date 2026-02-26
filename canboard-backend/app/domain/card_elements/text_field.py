@@ -1,9 +1,10 @@
 from app.domain.card_elements.card_element import CardElement
+from app.domain.values.name import Name
 
 class TextField(CardElement):
     """Domain entity representing a text field card element."""
     
-    def __init__(self, id: int, name: str, content: str):
+    def __init__(self, id: int, name: Name, content: str):
         """
         Initialize a TextField.
         

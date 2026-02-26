@@ -36,6 +36,11 @@ class TestName:
         name = Name("Initial")
         with pytest.raises(ValueError, match="Name cannot be empty"):
             name.value = "   "
+        
+    def test_value_setter_with_non_string_raises_error(self):
+        name = Name("Initial")
+        with pytest.raises(ValueError, match="Name must be a string"):
+            name.value = 123
 
     def test_equality_with_same_value(self):
         name1 = Name("Same name")

@@ -36,6 +36,11 @@ class TestDescription:
         description = Description("Initial")
         with pytest.raises(ValueError, match="Description cannot be empty"):
             description.value = "   "
+        
+    def test_value_setter_with_non_string_raises_error(self):
+        description = Description("Initial")
+        with pytest.raises(ValueError, match="Description must be a string"):
+            description.value = 123
 
     def test_equality_with_same_value(self):
         desc1 = Description("Same description")

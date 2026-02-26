@@ -19,7 +19,6 @@ TEST_CARD_ELEMENT_ID = 1
 TEST_CARD_ELEMENT_NAME = "Test Card Element"
 TEST_CARD_ELEMENT_CONTENT = "Test Content"
 
-@pytest.mark.tested_classes("CardElement")
 class TestCardElement:
     
     @pytest.fixture()

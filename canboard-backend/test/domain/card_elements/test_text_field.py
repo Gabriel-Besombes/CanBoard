@@ -13,8 +13,6 @@ TEST_TEXT_FIELD_ID = 1
 TEST_TEXT_FIELD_NAME = "Test Text Field"
 TEST_TEXT_FIELD_CONTENT = "This is a test text field."
 
-
-@pytest.mark.tested_classes("TextField")
 class TestTextField:
     
     @pytest.fixture()

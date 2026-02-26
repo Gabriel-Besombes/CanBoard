@@ -25,7 +25,6 @@ TEST_CARD_ELEMENTS = [
     TestCardElement(id=2, name="Element 2")
 ]
 
-@pytest.mark.tested_classes("Card")
 class TestCard:
     
     @pytest.fixture()

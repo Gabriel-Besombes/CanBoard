@@ -17,7 +17,6 @@ class TestEntity(BaseEntity):
 
 TEST_BASE_ENTITY_ID = 1
 
-@pytest.mark.tested_classes("BaseEntity")
 class TestBaseEntity:
 
     @pytest.fixture

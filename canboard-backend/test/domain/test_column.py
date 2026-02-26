@@ -18,8 +18,6 @@ TEST_COLUMN_CARDS = [
     Card(id=2, name="Card 2", description="Second test card.")
 ]
 
-
-@pytest.mark.tested_classes("Column")
 class TestColumn:
     
     @pytest.fixture()

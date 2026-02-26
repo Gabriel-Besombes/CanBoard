@@ -71,6 +71,13 @@ class Column(BaseEntity):
         if not isinstance(card, Card):
             raise ValueError("Card must be a Card instance")
         self._cards.insert(index, card)
+    
+    def get_card_by_id(self, card_id: int) -> Card:
+        """Get a card from the column by its ID."""
+        for card in self.cards:
+            if card.id == card_id:
+                return card
+        raise ValueError(f"Card with id {card_id} not found in column")
 
     def __repr__(self) -> str:
         return f"Column(id={self.id}, name={self.name}, description={self.description}, cards={self.cards})"

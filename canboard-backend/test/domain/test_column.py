@@ -84,6 +84,20 @@ class TestColumn:
         with pytest.raises(ValueError):
             column.move_card(TEST_COLUMN_CARDS[1], 0)  # Moving a non-existent card should raise an error
 
+    def test_get_card_by_id_success(self, column: Column):
+        """Ensure get_card_by_id returns the correct card when present."""
+        # add cards and verify lookups
+        column.add_card(TEST_COLUMN_CARDS[0])
+        column.add_card(TEST_COLUMN_CARDS[1])
+        assert column.get_card_by_id(1) == TEST_COLUMN_CARDS[0]
+        assert column.get_card_by_id(2) == TEST_COLUMN_CARDS[1]
+
+    def test_get_card_by_id_not_found(self, column: Column):
+        """get_card_by_id should raise ValueError if card id is missing."""
+        column.add_card(TEST_COLUMN_CARDS[0])
+        with pytest.raises(ValueError):
+            column.get_card_by_id(99)
+
     def test_insert_card_at_beginning(self, column: Column):
         """Test that a card can be inserted at the beginning of the column."""
         column.add_card(TEST_COLUMN_CARDS[1])

@@ -2,11 +2,13 @@ from app.domain.base_entity import BaseEntity
 from app.domain.card import Card
 from app.domain.values.name import Name
 from app.domain.values.description import Description
+from app.domain.values.entity_id import EntityId
+from typing import List, Optional
 
 class Column(BaseEntity):
     """Represents a column domain entity containing cards."""
 
-    def __init__(self, id: int, name: Name, description: Description, cards: list[Card] = None):
+    def __init__(self, name: Name, description: Description, cards: Optional[List[Card]] = None, id: Optional[EntityId] = None):
         super().__init__(id)
         self.name = name
         self.description = description
@@ -37,7 +39,7 @@ class Column(BaseEntity):
         return self._cards.copy()
     
     @cards.setter
-    def cards(self, new_cards: list[Card]) -> None:
+    def cards(self, new_cards: Optional[List[Card]]) -> None:
         if new_cards is None or new_cards == []:
             self._cards = []
             return
@@ -72,12 +74,12 @@ class Column(BaseEntity):
             raise ValueError("Card must be a Card instance")
         self._cards.insert(index, card)
     
-    def get_card_by_id(self, card_id: int) -> Card:
+    def get_card_by_id(self, card_id: EntityId) -> Card:
         """Get a card from the column by its ID."""
         for card in self.cards:
             if card.id == card_id:
                 return card
-        raise ValueError(f"Card with id {card_id} not found in column")
+        raise ValueError(f"Card with id {card_id} not found in column with id {self.id}")
 
     def __repr__(self) -> str:
         return f"Column(id={self.id}, name={self.name}, description={self.description}, cards={self.cards})"

@@ -1,11 +1,13 @@
 from app.domain.base_entity import BaseEntity
 from app.domain.values.name import Name
+from app.domain.values.entity_id import EntityId
 from abc import ABC
+from typing import Optional, Any
 
 class CardElement(BaseEntity, ABC):
     """Domain entity representing a card element."""
     
-    def __init__(self, id: int, name: Name, content):
+    def __init__(self, name: Name, content: Any, id: Optional[EntityId] = None):
         """
         Initialize a CardElement.
         

@@ -1,22 +1,23 @@
 from abc import ABC
+from app.domain.values.entity_id import EntityId
+from typing import Optional
 
 class BaseEntity(ABC):
     """Base class for all domain entities."""
 
-    def __init__(self, id: int):
-        if not isinstance(id, int):
-            raise TypeError("id must be an integer")
-        if id <= 0:
-            raise ValueError("id must be a positive integer")
-        self._id = id
+    def __init__(self, id: Optional[EntityId] = None):
+        if id is None:
+            self._id = EntityId.new()
+        elif not isinstance(id, EntityId):
+            raise TypeError("id must be an EntityId")
+        else:
+            self._id = id
 
     @property
-    def id(self) -> int:
+    def id(self) -> EntityId:
         return self._id
 
     def __eq__(self, other):
-        if not isinstance(other, BaseEntity):
-            return NotImplemented
         return type(self) is type(other) and self.id == other.id
 
     def __hash__(self):

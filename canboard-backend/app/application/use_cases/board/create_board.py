@@ -15,7 +15,7 @@ class CreateBoardUseCase:
         """
         Execute the create board use case.
         
-        Args:
+        Args: 
             command: CreateBoardCommand containing name and description
             
         Returns:

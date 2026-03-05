@@ -4,12 +4,11 @@ from app.domain.card import Card
 from app.domain.values.name import Name
 from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
-from typing import List, Optional
 
 class Board(BaseEntity):
     """Board domain entity."""
 
-    def __init__(self, name: Name, description: Description, columns: Optional[List[Column]] = None, id: Optional[EntityId] = None):
+    def __init__(self, name: Name, description: Description, columns: list[Column] | None = None, id: EntityId | None = None):
         super().__init__(id=id)
         self.name = name
         self.description = description
@@ -36,11 +35,11 @@ class Board(BaseEntity):
         self._description = new_description
         
     @property
-    def columns(self) -> List[Column]:
+    def columns(self) -> list[Column]:
         return self._columns.copy()
     
     @columns.setter
-    def columns(self, new_columns: Optional[List[Column]]) -> None:
+    def columns(self, new_columns: list[Column] | None) -> None:
         if new_columns is None or new_columns == []:
             self._columns = []
             return

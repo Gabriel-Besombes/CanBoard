@@ -3,12 +3,11 @@ from app.domain.card_elements.card_element import CardElement
 from app.domain.values.name import Name
 from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
-from typing import List, Optional
 
 class Card(BaseEntity):
     """Domain entity representing a card with elements."""
 
-    def __init__(self, name: Name, description: Description, elements: List[CardElement] = None, id: Optional[EntityId] = None):
+    def __init__(self, name: Name, description: Description, elements: list[CardElement] = None, id: EntityId | None = None):
         super().__init__(id=id)
         self._name = name
         self._description = description
@@ -35,7 +34,7 @@ class Card(BaseEntity):
         self._description = new_description
         
     @property
-    def elements(self) -> List[CardElement]:
+    def elements(self) -> list[CardElement]:
         return self._elements
 
     def add_element(self, element: CardElement) -> None:

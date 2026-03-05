@@ -1,11 +1,10 @@
 from abc import ABC
 from app.domain.values.entity_id import EntityId
-from typing import Optional
 
 class BaseEntity(ABC):
     """Base class for all domain entities."""
 
-    def __init__(self, id: Optional[EntityId] = None):
+    def __init__(self, id: EntityId | None = None):
         if id is None:
             self._id = EntityId.new()
         elif not isinstance(id, EntityId):

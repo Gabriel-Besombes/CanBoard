@@ -3,12 +3,11 @@ from app.domain.card import Card
 from app.domain.values.name import Name
 from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
-from typing import List, Optional
 
 class Column(BaseEntity):
     """Represents a column domain entity containing cards."""
 
-    def __init__(self, name: Name, description: Description, cards: Optional[List[Card]] = None, id: Optional[EntityId] = None):
+    def __init__(self, name: Name, description: Description, cards: list[Card] | None = None, id: EntityId | None = None):
         super().__init__(id=id)
         self.name = name
         self.description = description
@@ -39,7 +38,7 @@ class Column(BaseEntity):
         return self._cards.copy()
     
     @cards.setter
-    def cards(self, new_cards: Optional[List[Card]]) -> None:
+    def cards(self, new_cards: list[Card] | None) -> None:
         if new_cards is None or new_cards == []:
             self._cards = []
             return

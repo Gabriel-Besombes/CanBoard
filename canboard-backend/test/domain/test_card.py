@@ -9,8 +9,9 @@ Tested classes:
 
 import pytest
 from app.domain.card_elements.card_element import CardElement
+from app.domain.values.entity_id import EntityId
 
-TEST_CARD_ID = 1
+TEST_CARD_ID = EntityId.new()
 TEST_CARD_NAME = "Test Card"
 TEST_CARD_DESCRIPTION = "This is a test card."
 
@@ -21,8 +22,8 @@ class TestCardElement(CardElement):
         super().__init__(id, name, content)
 
 TEST_CARD_ELEMENTS = [
-    TestCardElement(id=1, name="Element 1"),
-    TestCardElement(id=2, name="Element 2")
+    TestCardElement(id=EntityId.new(), name="Element 1"),
+    TestCardElement(id=EntityId.new(), name="Element 2")
 ]
 
 class TestCard:

@@ -9,7 +9,7 @@ class Column(BaseEntity):
     """Represents a column domain entity containing cards."""
 
     def __init__(self, name: Name, description: Description, cards: Optional[List[Card]] = None, id: Optional[EntityId] = None):
-        super().__init__(id)
+        super().__init__(id=id)
         self.name = name
         self.description = description
         self.cards = cards

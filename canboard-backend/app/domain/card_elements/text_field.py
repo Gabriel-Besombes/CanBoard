@@ -15,7 +15,7 @@ class TextField(CardElement):
             name: The name of the card element.
             content: The text content of the text field.
         """
-        super().__init__(id, name, content)
+        super().__init__(id=id, name=name, content=content)
 
     @property
     def content(self) -> str:

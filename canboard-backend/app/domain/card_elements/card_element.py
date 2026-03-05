@@ -16,7 +16,7 @@ class CardElement(BaseEntity, ABC):
             name: The name of the card element.
             content: The content of the card element, can be of any type depending on the specific element.
         """
-        super().__init__(id)
+        super().__init__(id=id)
         self._name = name
         self._content = content
         

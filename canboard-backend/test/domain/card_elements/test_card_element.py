@@ -8,14 +8,15 @@ Tested classes:
 """
 
 import pytest
+from app.domain.values.entity_id import EntityId
 
 class TestElement(CardElement):
     """Empty subclass of CardElement for testing purposes. All testing will be done on this dummy class since CardElement is abstract."""
     
     def __init__(self, id, name, content=None):
-        super().__init__(id, name, content)
+        super().__init__(id=id, name=name, content=content)
 
-TEST_CARD_ELEMENT_ID = 1
+TEST_CARD_ELEMENT_ID = EntityId.new()
 TEST_CARD_ELEMENT_NAME = "Test Card Element"
 TEST_CARD_ELEMENT_CONTENT = "Test Content"
 

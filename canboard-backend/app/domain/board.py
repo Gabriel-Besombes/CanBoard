@@ -10,7 +10,7 @@ class Board(BaseEntity):
     """Board domain entity."""
 
     def __init__(self, name: Name, description: Description, columns: Optional[List[Column]] = None, id: Optional[EntityId] = None):
-        super().__init__(id)
+        super().__init__(id=id)
         self.name = name
         self.description = description
         self.columns = columns

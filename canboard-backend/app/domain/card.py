@@ -9,7 +9,7 @@ class Card(BaseEntity):
     """Domain entity representing a card with elements."""
 
     def __init__(self, name: Name, description: Description, elements: List[CardElement] = None, id: Optional[EntityId] = None):
-        super().__init__(id)
+        super().__init__(id=id)
         self._name = name
         self._description = description
         self._elements = elements if elements is not None else []

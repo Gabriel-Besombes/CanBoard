@@ -8,8 +8,9 @@ Tested classes:
 """
 
 import pytest
+from app.domain.values.entity_id import EntityId
 
-TEST_TEXT_FIELD_ID = 1
+TEST_TEXT_FIELD_ID = EntityId.new()
 TEST_TEXT_FIELD_NAME = "Test Text Field"
 TEST_TEXT_FIELD_CONTENT = "This is a test text field."
 

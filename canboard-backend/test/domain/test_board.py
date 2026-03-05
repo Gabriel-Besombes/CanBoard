@@ -10,8 +10,9 @@ Tested classes:
 import pytest
 from app.domain.values.name import Name
 from app.domain.values.description import Description
+from app.domain.values.entity_id import EntityId
 
-TEST_BOARD_ID = 1
+TEST_BOARD_ID = EntityId.new()
 TEST_BOARD_NAME = Name("Test Board")
 TEST_BOARD_DESCRIPTION = Description("This is a test board.")
 

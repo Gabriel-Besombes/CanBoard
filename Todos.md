@@ -10,3 +10,5 @@
 * Config?
 * add users
 * concurrency?
+* Study DDD and document its use in this project
+* Study CQRS

@@ -1,10 +1,10 @@
-from app.domain.board import Board
+from app.domain.entities.board import Board
 
 """
 Tests for the Board domain entity.
 
 Tested classes:
-- app.domain.board.Board
+- app.domain.entities.board.Board
 """
 
 import pytest

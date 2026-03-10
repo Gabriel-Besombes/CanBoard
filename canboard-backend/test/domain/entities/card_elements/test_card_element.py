@@ -1,10 +1,10 @@
-from app.domain.card_elements.card_element import CardElement
+from app.domain.entities.card_elements.card_element import CardElement
 
 """
 Tests for the CardElement domain entity.
 
 Tested classes:
-- app.domain.card_element.CardElement
+- app.domain.entities.card_element.CardElement
 """
 
 import pytest

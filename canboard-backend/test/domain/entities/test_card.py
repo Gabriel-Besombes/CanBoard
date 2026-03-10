@@ -1,14 +1,14 @@
-from app.domain.card import Card
+from app.domain.entities.card import Card
 
 """
 Tests for the Card domain entity.
 
 Tested classes:
-- app.domain.card.Card
+- app.domain.entities.card.Card
 """
 
 import pytest
-from app.domain.card_elements.card_element import CardElement
+from app.domain.entities.card_elements.card_element import CardElement
 from app.domain.values.entity_id import EntityId
 
 TEST_CARD_ID = EntityId.new()

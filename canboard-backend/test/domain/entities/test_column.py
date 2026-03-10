@@ -1,14 +1,14 @@
-from app.domain.column import Column
+from app.domain.entities.column import Column
 
 """
 Tests for the Column domain entity.
 
 Tested classes:
-- app.domain.column.Column
+- app.domain.entities.column.Column
 """
 
 import pytest
-from app.domain.card import Card
+from app.domain.entities.card import Card
 from app.domain.values.name import Name
 from app.domain.values.description import Description
 

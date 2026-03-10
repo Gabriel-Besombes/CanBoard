@@ -1,10 +1,10 @@
-from app.domain.card_elements.text_field import TextField
+from app.domain.entities.card_elements.text_field import TextField
 
 """
 Tests for the TextField domain entity.
 
 Tested classes:
-- app.domain.card_elements.TextField
+- app.domain.entities.card_elements.TextField
 """
 
 import pytest

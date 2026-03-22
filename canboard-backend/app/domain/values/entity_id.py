@@ -1,8 +1,9 @@
 from uuid import uuid7, UUID
 from dataclasses import dataclass
+from app.domain.values.value_compared import ValueCompared
 
 @dataclass(frozen=True)
-class EntityId:
+class EntityId(ValueCompared):
     value: UUID
     
     @staticmethod

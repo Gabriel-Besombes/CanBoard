@@ -1,19 +1,14 @@
-class Description:
-    def __init__(self, value: str):
-        self.value = value
+from dataclasses import dataclass
+from app.domain.values.value_compared import ValueCompared
 
-    @property
-    def value(self) -> str:
-        return self._value
-    
-    @value.setter
-    def value(self, new_value: str):
-        if not isinstance(new_value, str):
+
+@dataclass(frozen=True)
+class Description(ValueCompared):
+    value: str
+
+    def __post_init__(self):
+        if not isinstance(self.value, str):
             raise ValueError("Description must be a string")
         
-        if not new_value.strip():
+        if not self.value.strip():
             raise ValueError("Description cannot be empty")
-        self._value = new_value
-
-    def __eq__(self, other):
-        return isinstance(other, Description) and self.value == other.value

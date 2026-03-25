@@ -12,3 +12,4 @@
 * concurrency?
 * Study DDD and document its use in this project
 * Study CQRS
+* replace value objects with frozen dataclasses

@@ -4,17 +4,31 @@ from app.domain.values.name import Name
 from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
 from app.domain.collections.card_collection import CardCollection
-from pydantic import PrivateAttr
+from app.domain.values.metadata import MetaData
 
 class Column(BaseEntity):
     """Represents a column domain entity containing cards."""
     
-    name: Name
-    description: Description
-    _cards: CardCollection = PrivateAttr(default_factory=CardCollection)
+    __slots__ = ("_name", "_description", "_cards")
+    
+    def __init__(self, metadata: MetaData, name: Name, description: Description, cards: CardCollection | None = None):
+        super().__init__(metadata)
+        self._name = name
+        self._description = description
+        self._cards = cards if cards else CardCollection()
     
 #region Card management
     #region GETTERS
+    @property
+    def name(self) -> Name:
+        """Get column name."""
+        return self._name
+    
+    @property
+    def description(self) -> Description:
+        """Get column description."""
+        return self._description
+    
     @property
     def cards(self) -> tuple[Card, ...]:
         """Get column cards."""

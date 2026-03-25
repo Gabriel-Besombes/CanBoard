@@ -5,18 +5,30 @@ from app.domain.values.name import Name
 from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
 from app.domain.collections.column_collection import ColumnCollection
-from pydantic import  PrivateAttr
+from app.domain.values.metadata import MetaData
 
 
 class Board(BaseEntity):
     """Board domain entity."""
     
-    name: Name
-    description: Description
-    _columns: ColumnCollection = PrivateAttr(default_factory=ColumnCollection)
+    __slots__ = ("_name", "_description", "_columns")
+    
+    def __init__(self, metadata: MetaData, name: Name, description: Description, columns: ColumnCollection | None = None):
+        super().__init__(metadata)
+        self._name = name
+        self._description = description
+        self._columns = columns if columns else ColumnCollection()
     
 #region Column management
     #region GETTERS
+    @property
+    def name(self) -> Name:
+        return self._name
+    
+    @property
+    def description(self) -> Description:
+        return self._description
+    
     @property
     def columns(self) -> tuple[Column, ...]:
         """Get board columns."""
@@ -81,13 +93,16 @@ class Board(BaseEntity):
 #endregion
 
 #region Card management
+    def _find_column_containing_card(self, card_id: EntityId) -> Column:
+        for column in self.columns:
+            if column.check_card_exists_by_id(card_id):
+                return column
+        raise ValueError(f"Card with id {card_id} not found in board {self.id}")
+            
     #region GETTERS
     def get_card_by_id(self, card_id: EntityId) -> Card:
         """Get a card by its ID from any column."""
-        for column in self.columns:
-            if column.check_card_exists_by_id(card_id):
-                return column.get_card_by_id(card_id)
-        raise ValueError(f"Card with id {card_id} not found in board {self.id}")
+        return self._find_column_containing_card(card_id = card_id).get_card_by_id(card_id)
     #endregion
     
     #region CHECKERS
@@ -123,11 +138,7 @@ class Board(BaseEntity):
     
     def remove_card_by_id(self, card_id: EntityId) -> None:
         """Remove a card from the board by its ID."""
-        for column in self.columns:
-            if column.check_card_exists_by_id(card_id):
-                column.remove_card_by_id(card_id)
-                return
-        raise ValueError(f"Card with id {card_id} not found in board {self.id}")
+        self._find_column_containing_card(card_id=card_id).remove_card_by_id(card_id=card_id)
     
     def remove_card_by_index(self, index: int, column_id: EntityId) -> None:
         """Remove a card from the board by its index in a specific column."""

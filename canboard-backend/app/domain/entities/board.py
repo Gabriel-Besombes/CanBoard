@@ -6,12 +6,13 @@ from app.domain.values.description import Description
 from app.domain.values.entity_id import EntityId
 from app.domain.collections.column_collection import ColumnCollection
 from app.domain.values.metadata import MetaData
+from app.domain.errors import NotFoundError
 
 
 class Board(BaseEntity):
     """Board domain entity."""
     
-    __slots__ = ("_name", "_description", "_columns")
+    __slots__ = ("_name", "_description", "_columns",)
     
     def __init__(self, metadata: MetaData, name: Name, description: Description, columns: ColumnCollection | None = None):
         super().__init__(metadata)
@@ -97,7 +98,7 @@ class Board(BaseEntity):
         for column in self.columns:
             if column.check_card_exists_by_id(card_id):
                 return column
-        raise ValueError(f"Card with id {card_id} not found in board {self.id}")
+        raise NotFoundError("Card", card_id)
             
     #region GETTERS
     def get_card_by_id(self, card_id: EntityId) -> Card:
@@ -134,7 +135,7 @@ class Board(BaseEntity):
             if column.check_card_exists(card):
                 column.remove_card(card)
                 return
-        raise ValueError(f"{card} not found in board {self.id}")
+        raise NotFoundError("Card", card.id, message=f"{card} not found in board {self.id}")
     
     def remove_card_by_id(self, card_id: EntityId) -> None:
         """Remove a card from the board by its ID."""

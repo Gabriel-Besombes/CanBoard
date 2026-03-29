@@ -8,21 +8,27 @@ Tested classes:
 """
 
 import pytest
+from datetime import datetime, UTC
+from app.domain.values.name import Name
 from app.domain.values.entity_id import EntityId
 
 TEST_TEXT_FIELD_ID = EntityId.new()
-TEST_TEXT_FIELD_NAME = "Test Text Field"
+TEST_TEXT_FIELD_NAME = Name("Test Text Field")
 TEST_TEXT_FIELD_CONTENT = "This is a test text field."
+TEST_CREATED_AT = datetime.now(tz=UTC)
+TEST_CREATED_BY = EntityId.new()
 
 class TestTextField:
     
     @pytest.fixture()
     def text_field(self) -> TextField:
         """Create a fresh TextField for each test."""
-        return TextField(id=TEST_TEXT_FIELD_ID, name=TEST_TEXT_FIELD_NAME, content=TEST_TEXT_FIELD_CONTENT)
+        return TextField(id=TEST_TEXT_FIELD_ID, name=TEST_TEXT_FIELD_NAME, content=TEST_TEXT_FIELD_CONTENT, created_at=TEST_CREATED_AT, created_by=TEST_CREATED_BY)
 
     def test_initialization(self, text_field: TextField):
         """Test that TextField initializes with correct attributes."""
         assert text_field.id == TEST_TEXT_FIELD_ID
         assert text_field.name == TEST_TEXT_FIELD_NAME
         assert text_field.content == TEST_TEXT_FIELD_CONTENT
+        assert text_field.created_at == TEST_CREATED_AT
+        assert text_field.created_by == TEST_CREATED_BY

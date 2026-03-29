@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
-from app.domain.board import Board
+from app.domain.entities.board import Board
 from app.domain.values.entity_id import EntityId
-
 
 class BoardRepository(ABC):
     """Abstract repository for Board domain entity."""
@@ -9,6 +8,11 @@ class BoardRepository(ABC):
     @abstractmethod
     async def save(self, board: Board) -> None:
         """Save a board to the repository."""
+        pass
+
+    @abstractmethod
+    async def add(self, board: Board) -> None:
+        """Add a board to the repository."""
         pass
 
     @abstractmethod

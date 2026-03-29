@@ -6,7 +6,7 @@ from app.domain.values.metadata import MetaData
 class BaseEntity:
     """Base class for all domain entities with immutable data."""
     
-    __slots__ = ("_metadata")
+    __slots__ = ("_metadata",)
     
     def __init__(self, metadata: MetaData):
         self._metadata = metadata

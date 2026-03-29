@@ -1,0 +1,2 @@
+from app.domain.repositories.user_repository import UserRepository
+from app.domain.repositories.board_repository import BoardRepository

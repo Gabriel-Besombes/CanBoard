@@ -9,7 +9,7 @@ from app.domain.values.metadata import MetaData
 class Card(BaseEntity):
     """Domain entity representing a card with elements."""
     
-    __slots__ = ("_name", "_description", "_elements")
+    __slots__ = ("_name", "_description", "_elements",)
     
     def __init__(self, metadata: MetaData, name: Name, description: Description, elements: CardElementCollection | None = None):
         super().__init__(metadata)

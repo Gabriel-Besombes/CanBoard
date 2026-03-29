@@ -1,4 +1,5 @@
 from typing import Generic, TypeVar, Iterable, Iterator
+from app.domain.errors import AlreadyExistsError, InvalidActionError, InvalidEntityError, NotFoundError
 from app.domain.values.entity_id import EntityId
 from app.domain.entities.base_entity import BaseEntity
 
@@ -7,7 +8,7 @@ T = TypeVar("T", bound=BaseEntity)
 class BaseEntityCollection(Generic[T]):
     
     _entity_type: type[T]
-    __slots__ = ("_items")
+    __slots__ = ("_items",)
     
     def __init__(self, items: Iterable[T] | None = None):
         self._items: list[T] = list(items or [])
@@ -20,13 +21,13 @@ class BaseEntityCollection(Generic[T]):
         for item in self._items:
             if item.id == entity_id:
                 return item
-        raise ValueError(f"Entity with id {entity_id} not found")
+        raise NotFoundError(self._entity_type.__name__, entity_id)
     
     def get_by_index(self, index: int) -> T:
         try:
             return self._items[index]
         except IndexError:
-            raise ValueError(f"Index {index} out of range")
+            raise InvalidActionError(message=f"Index {index} out of range")
         
     def __iter__(self) -> Iterator[T]:
         return iter(self._items)
@@ -35,7 +36,7 @@ class BaseEntityCollection(Generic[T]):
 #region CHECKERS
     def _validate_entity_type(self, item: T) -> None:
         if not isinstance(item, self._entity_type):
-            raise TypeError(f"{item} must be an instance of {self._entity_type.__name__}")
+            raise InvalidEntityError(self._entity_type.__name__, item)
         
     def exists(self, item: T) -> bool:
         self._validate_entity_type(item)
@@ -55,13 +56,13 @@ class BaseEntityCollection(Generic[T]):
     def append(self, item: T) -> None:
         self._validate_entity_type(item)
         if item in self:
-            raise ValueError(f"{item} already exists")
+            raise AlreadyExistsError(self._entity_type.__name__, item.id)
         self._items.append(item)
 
     def insert(self, index: int, item: T) -> None:
         self._validate_entity_type(item)
         if item in self:
-            raise ValueError(f"{item} already exists")
+            raise AlreadyExistsError(self._entity_type.__name__, item.id)
         self._items.insert(index, item)
 #endregion
 
@@ -69,7 +70,7 @@ class BaseEntityCollection(Generic[T]):
     def remove(self, item: T) -> None:
         self._validate_entity_type(item)
         if item not in self._items:
-            raise ValueError(f"{item} not found")
+            raise NotFoundError(self._entity_type.__name__, item.id)
         self._items.remove(item)
         
     def remove_by_id(self, entity_id: EntityId) -> None:
@@ -100,7 +101,7 @@ class BaseEntityCollection(Generic[T]):
 #endregion
 
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, BaseEntityCollection) and self._items == other._items
+        return type(self) is type(other) and self._items == other._items
 
     def __hash__(self) -> int:
         return hash((type(self), tuple(self._items)))

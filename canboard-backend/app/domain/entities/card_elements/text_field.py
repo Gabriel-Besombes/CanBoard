@@ -1,6 +1,5 @@
 from app.domain.entities.card_elements.card_element import CardElement
-from app.domain.values.metadata import MetaData
-from app.domain.values.name import Name
+from app.domain.values import MetaData, Name
 from app.domain.errors import DomainValidationError
 
 class TextField(CardElement):

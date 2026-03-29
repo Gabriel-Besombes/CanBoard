@@ -9,6 +9,8 @@ Tested classes:
 
 import pytest
 
+from dataclasses import FrozenInstanceError
+
 class TestDescription:
     def test_init_with_valid_description(self):
         description = Description("Valid description")
@@ -22,25 +24,10 @@ class TestDescription:
         with pytest.raises(ValueError, match="Description cannot be empty"):
             Description("   ")
 
-    def test_value_setter_with_valid_value(self):
+    def test_description_is_immutable(self):
         description = Description("Initial")
-        description.value = "Updated description"
-        assert description.value == "Updated description"
-
-    def test_value_setter_with_empty_string_raises_error(self):
-        description = Description("Initial")
-        with pytest.raises(ValueError, match="Description cannot be empty"):
-            description.value = ""
-
-    def test_value_setter_with_whitespace_only_raises_error(self):
-        description = Description("Initial")
-        with pytest.raises(ValueError, match="Description cannot be empty"):
-            description.value = "   "
-        
-    def test_value_setter_with_non_string_raises_error(self):
-        description = Description("Initial")
-        with pytest.raises(ValueError, match="Description must be a string"):
-            description.value = 123
+        with pytest.raises(FrozenInstanceError):
+            description.value = "Updated description"
 
     def test_equality_with_same_value(self):
         desc1 = Description("Same description")
@@ -56,4 +43,4 @@ class TestDescription:
         description = Description("Test")
         assert description != "Test"
         assert description != 123
-        assert description != None
+        assert description is not None

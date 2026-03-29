@@ -8,17 +8,17 @@ class MetaData(ABC):
     
     __slots__ = ("_id", "_created_at", "_created_by",)
     
-    @abstractmethod
     @property
+    @abstractmethod
     def id(self) -> EntityId:
         pass
     
-    @abstractmethod
     @property
+    @abstractmethod
     def created_at(self) -> datetime:
         pass
     
-    @abstractmethod
     @property
+    @abstractmethod
     def created_by(self) -> EntityId:
         pass

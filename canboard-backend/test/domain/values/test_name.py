@@ -9,6 +9,8 @@ Tested classes:
 
 import pytest
 
+from dataclasses import FrozenInstanceError
+
 class TestName:
     def test_init_with_valid_name(self):
         name = Name("Valid name")
@@ -22,25 +24,10 @@ class TestName:
         with pytest.raises(ValueError, match="Name cannot be empty"):
             Name("   ")
 
-    def test_value_setter_with_valid_value(self):
+    def test_name_is_immutable(self):
         name = Name("Initial")
-        name.value = "Updated name"
-        assert name.value == "Updated name"
-
-    def test_value_setter_with_empty_string_raises_error(self):
-        name = Name("Initial")
-        with pytest.raises(ValueError, match="Name cannot be empty"):
-            name.value = ""
-
-    def test_value_setter_with_whitespace_only_raises_error(self):
-        name = Name("Initial")
-        with pytest.raises(ValueError, match="Name cannot be empty"):
-            name.value = "   "
-        
-    def test_value_setter_with_non_string_raises_error(self):
-        name = Name("Initial")
-        with pytest.raises(ValueError, match="Name must be a string"):
-            name.value = 123
+        with pytest.raises(FrozenInstanceError):
+            name.value = "Updated name"
 
     def test_equality_with_same_value(self):
         name1 = Name("Same name")
@@ -56,4 +43,4 @@ class TestName:
         name = Name("Test")
         assert name != "Test"
         assert name != 123
-        assert name != None
+        assert name is not None

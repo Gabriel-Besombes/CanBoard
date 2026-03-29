@@ -7,7 +7,7 @@ Tested classes:
 - app.domain.values.entity_id.EntityId
 """
 
-from uuid import UUID, uuid7, uuid6
+from uuid import UUID, uuid4, uuid7
 import pytest
 
 
@@ -20,9 +20,9 @@ class TestEntityId:
 
     def test_init_with_invalid_uuid_version_raises_error(self):
         """Test that EntityId raises an error when initialized with a non-UUIDv7."""
-        uuid_v6 = uuid6()  # Using uuidv6 as an example of a non-UUIDv7
+        uuid_v4 = uuid4()
         with pytest.raises(ValueError, match="Must be UUIDv7"):
-            EntityId(uuid_v6)
+            EntityId(uuid_v4)
 
     def test_new_creates_valid_uuidv7(self):
         """Test that EntityId.new() creates a valid UUIDv7."""

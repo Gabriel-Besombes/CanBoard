@@ -5,7 +5,12 @@ from app.domain.values.description import Description
 from app.application.commands.create_board_command import CreateBoardCommand
 from app.application.dtos.board_dto import BoardDTO
 
-class CreateBoardUseCase:
+class UseCaseInterface:
+    
+    def helper_function():
+        return()
+
+class CreateBoardUseCase(UseCaseInterface):
     """Use case for creating a new board."""
     
     def __init__(self, board_repository: BoardRepository):
@@ -29,7 +34,7 @@ class CreateBoardUseCase:
         description = Description(command.description)
         
         # Create domain entity
-        board = Board(name=name, description=description)
+        board = Board(name=name, description=description, metadata=)
         
         # Persist through repository
         await self.board_repository.save(board)

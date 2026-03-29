@@ -1,6 +1,5 @@
-from app.domain.entities.base_entity import BaseEntity
-from app.domain.values.name import Name
-from app.domain.values.metadata import MetaData
+from app.domain.entities import BaseEntity
+from app.domain.values import Name, MetaData
 from typing import Any
 
 
